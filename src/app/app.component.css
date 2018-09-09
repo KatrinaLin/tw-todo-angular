@@ -1,0 +1,17 @@
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 20px;
+}
+
+ul li {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+ul li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
