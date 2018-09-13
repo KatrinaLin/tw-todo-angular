@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TodoService} from "./todo.service";
+import {Todo} from "./todo";
 
 @Component({
   selector: 'app-exercise-index',
@@ -8,7 +9,7 @@ import {TodoService} from "./todo.service";
 })
 export class IndexComponent implements OnInit {
 
-  todoList = [];
+  todoList: Todo[] = [];
 
   constructor(private todoService: TodoService) { }
 
@@ -18,7 +19,7 @@ export class IndexComponent implements OnInit {
 
   getTodoList() {
     this.todoService.getList().subscribe(
-      (data: any[]) => this.todoList = data,
+      (data: Todo[]) => this.todoList = data,
       (error) => console.log(error)
     );
   }
