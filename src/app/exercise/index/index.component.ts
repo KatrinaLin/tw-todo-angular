@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TodoService} from "./todo.service";
 
 @Component({
   selector: 'app-exercise-index',
@@ -7,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  todoList = [{ "id": 1, "value": "todo item 1", "checked": false },
-    { "id": 2, "value": "todo item 2", "checked": false }];
+  todoList = [];
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
+    this.getTodoList();
   }
 
+  getTodoList() {
+    this.todoService.getList().subscribe(
+      (data: any[]) => this.todoList = data,
+      (error) => console.log(error)
+    );
+  }
 }
