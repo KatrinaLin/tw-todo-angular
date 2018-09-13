@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TodoService} from "./todo.service";
 import {Todo} from "./todo";
+import {t} from "@angular/core/src/render3";
 
 @Component({
   selector: 'app-exercise-index',
@@ -24,13 +25,24 @@ export class IndexComponent implements OnInit {
     );
   }
 
-  createTodo(inputValue: string) {
+  addTodo(inputValue: string) {
     this.postTodo({id: null, value: inputValue, checked: false});
   }
 
   postTodo(todo: Todo) {
-    this.todoService.addTodo(todo).subscribe(todo => {
+    this.todoService.postTodo(todo).subscribe(todo => {
       this.todoList.push(todo);
+    });
+  }
+
+  changeChecked(todoItem: Todo) {
+    this.updateTodo({id: todoItem.id, value: todoItem.value, checked: !todoItem.checked});
+  }
+
+  updateTodo(todo: Todo) {
+    this.todoService.updateTodo(todo).subscribe(
+      todo => {
+        this.todoList.find(item => item.id === todo.id).checked = todo.checked;
     });
   }
 }
